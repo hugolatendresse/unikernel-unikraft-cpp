@@ -4,18 +4,24 @@ This directory contains a C++-based "Hello, World!" example running on Unikraft.
 
 ## Set Up
 
-To run this example, [install Unikraft's companion command-line toolchain `kraft`](https://unikraft.org/docs/cli), clone this repository and `cd` into this directory.
+This requires Docker to work. If Docker is not installed, can do this on Ubuntu:
+```bash
+sudo apt-get update
+sudo apt-get install -y docker.io
+sudo usermod -aG docker $USER
+newgrp docker
+sudo systemctl enable --now docker
+```
 
 ## Run and Use
 
 Use `kraft` to run the image and start a Unikraft instance:
 
 ```bash
-kraft run --rm --plat qemu --arch x86_64 .
+newgrp docker
+docker ps # just to check if returns docker column names
+kraft run
 ```
-
-If the `--plat` argument is left out, it defaults to `qemu`.
-If the `--arch` argument is left out, it defaults to your system's CPU architecture.
 
 Once executed, you should see a "Bye, World!" message.
 
